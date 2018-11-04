@@ -1,0 +1,764 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Practica 3 Se&ntilde;ales en Tiempo Continuo</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-11-04"><meta name="DC.source" content="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Practica 3 Se&ntilde;ales en Tiempo Continuo</h1><!--introduction--><p>Grupo: 2TV2</p><p>Materia: Se&ntilde;ales y Sistemas</p><p>Alumnos:</p><p><i>Espinosa Salas Emmanuel</i></p><p><i>Sandoval Palma Miguel Angel</i></p><p><i>Villegas Fraga Hamlet Ismael</i></p><p>Profesor: Dr. Rafael Mart&iacute;nez Mart&iacute;nez</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Introducci&oacute;n</a></li><li><a href="#8">Ejercicio 1</a></li><li><a href="#9">Ejercicio 2</a></li><li><a href="#11">Ejercicio 3</a></li><li><a href="#15">Ejercicio 4</a></li><li><a href="#17">Ejercicio 5</a></li><li><a href="#18">Ejercicio 6</a></li><li><a href="#23">Ejercicio 7</a></li><li><a href="#24">Referencias</a></li></ul></div><h2 id="1">Introducci&oacute;n</h2><p><b>MatLab</b></p><p>MATLAB (Matrix Laboratory, &#8220;laboratorio de matrices&#8221;). Es un software matem&aacute;tico con entorno de desarrollo integrado (IDE) el cual contiene un lenguaje de programaci&oacute;n propio (Lenguaje M) y es multiplataforma (Unix, Windows y Apple Mac Os X). MATLAB es un software de gran uso en Centros de Investigaci&oacute;n y Desarrollo as&iacute; como en universidades. En 1984 surge la primera versi&oacute;n, creado por Cleve Moler, con la idea de usar paquetes de subrutinas escritas en Fortran en los cursos de An&aacute;lisis Num&eacute;rico y &Aacute;lgebra Lineal, sin tener una necesidad de programas que usaran este lenguaje.</p><p>El lenguaje de programaci&oacute;n M se cre&oacute; en 1970 proporcionando un acceso sencillo al software de matrices LINPACK y EISPACK sin tener que hacer uso del lenguaje Fortran. Ya en 2004 se apreciaba que MATLAB era usado por aproximadamente m&aacute;s de un mill&oacute;n de personas, tanto acad&eacute;micos como empresarios. Dentro de sus principales funciones se encuentran:</p><div><ol><li>Manipulaci&oacute;n de Matrices.</li><li>La representaci&oacute;n de datos y funciones.</li><li>Implementaci&oacute;n de algoritmos.</li><li>Creaci&oacute;n de interfaces de usuario (GUI).</li><li>Comunicaci&oacute;n con programas en otros lenguajes y con otros dispositivos Hardware.</li></ol></div><p>Aqui podra encontrar un libro para apoyarse sobre <a href="http://www.dm.unibo.it/~piccolom/didattica/num_met/SAmatlab_09.pdf">Matlab</a></p><p><b>Octave</b></p><p>Octave es un lenguaje de alto nivel para realizar c&aacute;lculos num&eacute;ricos en el ordenador, y tambi&eacute;n es un programa capaz de interpretar este lenguaje y realizar los c&aacute;lculos. Octave ofrece una interfaz de usuario interactiva, orientada a l&iacute;nea de comandos, pero tambi&eacute;n puede ser utilizado en modo no interactivo, leyendo sus &oacute;rdenes de fichero. Octave originalmente fue desarrollado para facilitar la tarea a los estudiantes de Ingenier&iacute;a Qu&iacute;mica de la universidad de Texas, sin que estos tuvieran que enfrentarse a las dificultades de la programaci&oacute;n.</p><p>Su flexibilidad en seguida lo hizo popular y su uso se expandi&oacute; a otros problemas relacionados con el &aacute;lgebra lineal y las ecuaciones diferenciales y favoreci&oacute; su desarrollo, agregando las aportaciones de la comunidad de usuarios. Otros programas de caracter&iacute;sticas similares, y hasta cierto punto compatibles, son son el lenguaje R de la FSF, Matlab y Scilab. Estos dos &uacute;ltimos propietarios. Octave es software libre (bajo licencia GNU), lo que significa que se puede usar y redistribuir libremente, y que cualquiera puede ayudar para mejorarlo. Octave est&aacute; disponible en Internet en <a href="http://www.octave.org">http://www.octave.org</a>.</p><p><a href="https://cimec.org.ar/foswiki/pub/Main/Cimec/MetodosNumericosYSimulacion/metnums.pdf">Conceptos basicos en octave</a></p><p><b>Python</b></p><p>Python es un lenguaje de programaci&oacute;n el cual fue creado por el holand&eacute;s Guido van Rossum en los a&ntilde;os 90. Su nombre esta inspirado en el grupo humorista brit&aacute;nico Monty Python. Este lenguaje es caracterizado por su simplicidad y r&aacute;pido aprendizaje. Si queremos hacer el cl&aacute;sico hola mundo en este lenguaje, nos basta con escribir print &#8220;hola mundo&#8221;. Las caracter&iacute;sticas principales de este lenguaje son cuatro:</p><div><ol><li>Tipado din&aacute;mico, no es necesario indicar el tipo de variable al momento de declararlo ya que lo identifica automaticamente.</li><li>Fuertemente tipado, no se permite tratar de manera implicita a una variable como si fuera de otro tipo.</li><li>Multiplataforma,  se refiere a que no depende de un sistema operativo en especifico para funcionar bien.</li><li>Multiparadigma, python es un lenguaje orientado a diversos paradigmas entre ellos tiene la programacion orientada a objetos, programaci&oacute;n estructurada, programaci&oacute;n funcional y programaci&oacute;n orientada a aspectos.</li></ol></div><p><a href="https://legacy.gitbook.com/book/swaroopch/byte-of-python/details">enlace de descarga o visualizacion sobre un libro para aprender python</a></p><h2 id="8">Ejercicio 1</h2><p>Crea una funci&oacute;n que se llame <i>fun1</i> y reciba dos parametros <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq08589834809570054062.png" alt="$\omega$" style="width:10px;height:7px;"> y <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq05508344529756732484.png" alt="$a$" style="width:7px;height:7px;"> la funci&oacute;n debe regresar la evaluaci&oacute;n <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq01407365636722940873.png" alt="$F(\omega)=a/(a^2+\omega^2)$" style="width:124px;height:17px;">, esta funci&oacute;n debe trabajar con <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq16064389548595522758.png" alt="$a\in R$" style="width:37px;height:11px;"> y <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq14447547358292026003.png" alt="$w\in  R^n$" style="width:46px;height:11px;">. Debe mostrar su c&oacute;digo en el reporte (sin ejecutar).</p><pre class="language-matlab"><span class="keyword">function</span> [f] = fun1(w,a)
+</pre><pre>     if imag(a)~=0</pre><pre>         disp('error')</pre><pre>     else</pre><pre>         f=a./(a.^2+w.^2)</pre><pre>     end</pre><pre class="language-matlab"><span class="keyword">end</span>
+</pre><h2 id="9">Ejercicio 2</h2><p>Construya una funci&oacute;n que gr&aacute;fique funciones de <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq02145986785580767623.png" alt="$f:R\rightarrow R$" style="width:66px;height:14px;"> en el formato de su elecci&oacute;n y pruebe su c&oacute;digo mostrando la gr&aacute;fica de <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq04634431881849194213.png" alt="$F(\omega)$" style="width:31px;height:15px;"> vs <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq08589834809570054062.png" alt="$\omega$" style="width:10px;height:7px;"> en el intervalo <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq01169792831847459841.png" alt="$[-2,2]$" style="width:38px;height:15px;"> para <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq13016372792947090052.png" alt="$a=1$" style="width:34px;height:10px;">, no debe incluir el c&oacute;digo, solo el uso de la funci&oacute;n para mostrar la gr&aacute;fica</p><p><img vspace="5" hspace="5" src="ejer22.jpg" alt=""> </p><h2 id="11">Ejercicio 3</h2><p>Construya una funci&oacute;n que gr&aacute;fique funciones de <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq07287922491706758619.png" alt="$f:R\rightarrow R^2$" style="width:70px;height:16px;"> en el formato de su elecci&oacute;n y pruebe su c&oacute;digo mostrando la gr&aacute;fica de la transformada de Fourier <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq14837990414550488255.png" alt="$F(w)$" style="width:32px;height:15px;"> en <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq01315095555081819470.png" alt="$[-10,10]$" style="width:52px;height:15px;"> de la funci&oacute;n <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq16179711886080607310.png" alt="$f(t)=e^{-2t}u(t)$" style="width:93px;height:17px;">, puede utilizar una funci&oacute;n anonima para este fin, no debe incluir el c&oacute;digo, solo el uso de la funci&oacute;n para mostrarla gr&aacute;fica. Reporte la gr&aacute;fica de <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq09478123530129115431.png" alt="$f(t)$" style="width:24px;height:15px;"> de <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq05003862285080136837.png" alt="$[-1,5]$" style="width:38px;height:15px;"> (recuerde que ya tiene una funci&oacute;n para esto). Reporte del espectro de magnitud y del espectro de fase en <img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq01315095555081819470.png" alt="$[-10,10]$" style="width:52px;height:15px;"> (puedes con sultar con help la descripci&oacute;n de <i>abs</i>, <i>angle</i>, <i>atan2</i>). Solo reporte las graficas.</p><p><img vspace="5" hspace="5" src="ejer331.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="ejer322.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="ejer332.jpg" alt=""> </p><h2 id="15">Ejercicio 4</h2><p>Realiza las mismas operaciones que Lathi en las secciones M1.1 a M1.4 que se encuentra al final del cap&iacute;tulo 1 y antes de la secci&oacute;n de problemas, cambie los <i>inline</i> por funciones anonimas</p><pre class="codeinput">close <span class="string">all</span>; clear <span class="string">all</span>; clc;
+<span class="comment">% M1.1</span>
+t = -5:0.01:5;
+
+
+
+<span class="comment">% Anonymous Function</span>
+ f = @(t) exp(-t).*cos(2*pi*t);
+
+<span class="comment">% Gr&aacute;fica de la funci&oacute;n an&oacute;nima</span>
+ figure(1)
+ plot(t, f(t),<span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2);
+ title(<span class="string">'M1.1: f(t) = e^{-t}cos(2\pit)'</span>);
+ xlabel(<span class="string">'t'</span>);
+ ylabel(<span class="string">'f(t)'</span>);
+ grid <span class="string">on</span>;
+
+<span class="comment">% M1.2</span>
+
+<span class="comment">% Anonymous Function u(t)</span>
+u = @(t) t &gt;= 0;
+
+<span class="comment">% Gr&aacute;fica de u(t)</span>
+figure(2);
+hold <span class="string">on</span>;
+plot(t, u(t),<span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'M1.2: Escalon u(t)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'u(t)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Anonymous Function</span>
+p = @(t) u(t) - u(t-1);
+
+<span class="comment">% Gr&aacute;fica de p(t)</span>
+figure(3);
+hold <span class="string">on</span>;
+plot(t, p(t),<span class="string">'c'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'M1.2: p(t) = u(t) - u(t-1)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'p(t)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">%M1.3</span>
+
+<span class="comment">% Anonymous Function</span>
+f = @(t) exp(-t).*cos(2*pi*t);
+
+<span class="comment">% Anonymous Function</span>
+g = @(t) f(t).*u(t);
+
+<span class="comment">% Gr&aacute;fica g(t)</span>
+figure(4);
+hold <span class="string">on</span>;
+plot(t, g(t),<span class="string">'k'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'M1.3: g(t)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'g(t)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Gr&aacute;fica g(2t+1)</span>
+figure(5);
+hold <span class="string">on</span>;
+plot(t, g(2*t+1),<span class="string">'y'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'M1.3: g(2t+1)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'g(2t+1)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Gr&aacute;fica g(-t+1)</span>
+figure(6);
+hold <span class="string">on</span>;
+plot(t, g(-1*t+1),<span class="string">'m'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'M1.3: g(-t+1)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'g(-t+1)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% Anonymous Function</span>
+h = @(t) g(2*t+1) + g(-1*t+1);
+
+<span class="comment">% Gr&aacute;fica g(-t+1)</span>
+figure(7);
+hold <span class="string">on</span>;
+plot(t, h(t), <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'M1.3: h(t) = g(2t+1) + g(-t+1)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'h(t)'</span>);
+grid <span class="string">on</span>;
+</pre><img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_01.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_02.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_03.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_04.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_05.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_06.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_07.png" style="width:560px;height:420px;" alt=""> <pre class="codeinput"><span class="comment">%M1.4</span>
+<span class="comment">% Definiciones</span>
+u = @(t) t &gt;= 0;
+x = @(t) exp(-t).*(u(t)-u(t-1));
+x2 = @(t) exp(-2*t).*(u(t)-u(t-1));
+
+<span class="comment">% Energ&iacute;a de x(t)</span>
+
+<span class="comment">% El resultado tendr&aacute; un 0.1% de error relativo</span>
+t = 0:0.001:1;
+
+<span class="comment">% Integraci&oacute;n num&eacute;rica mediante aproximaci&oacute;n rectangular (sum)</span>
+E_x = sum(x(t).*x(t)*0.001);
+display(E_x);
+
+<span class="comment">% Integraci&oacute;n num&eacute;rica mendiante cuadratura de Simpson (quad)</span>
+<span class="comment">% Se debe elevar al cuadrado la se&ntilde;al e indicar los l&iacute;mites de integraci&oacute;n</span>
+S_x = integral(x2,0,1);
+display(S_x);
+
+<span class="comment">% Energ&iacute;a de g(t)</span>
+
+t = 0:0.001:100;
+
+<span class="comment">% Definiciones</span>
+f = @(t) exp(-t).*cos(2*pi*t);
+f2 = @(t) exp(-2*t).*(cos(2*pi*t)).^2;
+g = @(t) f(t).*u(t);
+g2 = @(t) f2(t).*u(t);
+
+<span class="comment">% Integraci&oacute;n num&eacute;rica mediante aproximaci&oacute;n rectangular (sum)</span>
+E_g = sum(g(t).*g(t)*0.001);
+display(E_g);
+
+<span class="comment">% Integraci&oacute;n num&eacute;rica mendiante cuadratura de Simpson (quad)</span>
+S_g = integral(g2,0,100);
+display(S_g);
+
+<span class="comment">% Energ&iacute;a de h(t)</span>
+
+t = -2:0.001:2;
+
+<span class="comment">% Definiciones</span>
+h = @(t) g(2*t+1) + g(-1*t+1);
+h2 = @(t) g2(2*t+1) + g2(-1*t+1);
+
+<span class="comment">% Integraci&oacute;n num&eacute;rica mediante aproximaci&oacute;n rectangular (sum)</span>
+E_h = sum(h(t).*h(t)*0.001);
+display(E_h);
+
+<span class="comment">% Integraci&oacute;n num&eacute;rica mendiante cuadratura de Simpson (quad)</span>
+S_h = integral(h2,-1,1);
+display(S_h);
+</pre><pre class="codeoutput">
+E_x =
+
+    0.4328
+
+
+S_x =
+
+    0.4323
+
+
+E_g =
+
+    0.2567
+
+
+S_g =
+
+    0.2562
+
+
+E_h =
+
+    0.3769
+
+
+S_h =
+
+    0.3793
+
+</pre><h2 id="17">Ejercicio 5</h2><p>Resuelve el problema 1.2.2 usando las herramientas del paso anterior.</p><pre class="codeinput">t = -8:0.01:10;
+
+<span class="comment">% Definiciones</span>
+u = @(t) t &gt;= 0;
+x = @(t) -t.*(u(t+4)-u(t))+t.*(u(t)-u(t-2));
+
+<span class="comment">% Gr&aacute;fica de la se&ntilde;al x(t)</span>
+figure(8);
+hold <span class="string">on</span>;
+plot(t, x(t),<span class="string">'m'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'x(t) = -t(u(t+4)-u(t))+t(u(t)-u(t-2))'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x(t)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% a) x(t-4)</span>
+figure(9);
+hold <span class="string">on</span>;
+plot(t, x(t-4),<span class="string">'k'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'x(t-4)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x(t-4)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% b) x(t/1.5)</span>
+figure(10);
+hold <span class="string">on</span>;
+plot(t, x(t./(1.5)),<span class="string">'y'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'x(t/1.5)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x(t/1.5)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% c) x(-t)</span>
+figure(11);
+hold <span class="string">on</span>;
+plot(t, x(-t),<span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'x(-t)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x(-t)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% d) x(2t-4)</span>
+figure(12);
+hold <span class="string">on</span>;
+plot(t, x(2*t-4),<span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'x(2t-4)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x(2t-4)'</span>);
+grid <span class="string">on</span>;
+
+<span class="comment">% e) x(2-t)</span>
+figure(13);
+hold <span class="string">on</span>;
+plot(t, x(2-t),<span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+title(<span class="string">'x(2-t)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'x(2-t)'</span>);
+grid <span class="string">on</span>;
+</pre><img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_08.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_09.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_10.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_11.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_12.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_13.png" style="width:560px;height:420px;" alt=""> <h2 id="18">Ejercicio 6</h2><p>Escriba una funci&oacute;n que se llame <i>energia</i> que reciba como argumento una funci&oacute;n (an&oacute;nima o simb&oacute;lica) y que regrese el calculo de la energ&iacute;a, para esto puede resultar &uacute;til investigar las instrucciones <i>int</i> , <i>integral</i> Se presupone utilizar el c&oacute;digo solo con funciones de energia. Muestre el c&oacute;digo sin ejecutar, y posteriormente resuelva el problema 1.1.3</p><pre class="language-matlab"><span class="keyword">function</span> [resultado]= energia(funevaluar) <span class="comment">%la funcion energia recibe un argumento que es la funcion en terminos de t</span>
+</pre><pre>     limiteinferior=input('ingresa el limite de la integral ')</pre><pre>     limitesuperior=input('ingresa el limite superior de la integral ')</pre><pre>     resultado=int(abs(funevaluar).^2,limiteinferior,limitesuperior);</pre><pre class="language-matlab"><span class="keyword">end</span>
+</pre><p>a. Find the energies of the pair of signals x(t) and y(t) depicted in Fig. P1.1-3a and P1.1-3b. Sketch and find the energies of signals x(t) + y(t) and x(t) ? y(t).</p><p><img vspace="5" hspace="5" src="ejer6.png" alt=""> </p><p>(a)</p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq05008442668540732386.png" alt="$Ex = x(t) + y(t)$" style="width:106px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq15966310236007558972.png" alt="$Ex = 2 + 2 = 4$" style="width:99px;height:12px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq07923114220564966724.png" alt="$Ex = x(t) - y(t)$" style="width:106px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq06674509127152854750.png" alt="$Ex = 2 - 2 = 0$" style="width:98px;height:11px;"></p><p><img vspace="5" hspace="5" src="ejer6112.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="ejer6122.jpg" alt=""> </p><p>(b)</p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq05008442668540732386.png" alt="$Ex = x(t) + y(t)$" style="width:106px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq11816670698674350022.png" alt="$Ex = \pi + \pi = 2\pi$" style="width:110px;height:12px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq07923114220564966724.png" alt="$Ex = x(t) - y(t)$" style="width:106px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq09306657304479386851.png" alt="$Ex = \pi - \pi = 0$" style="width:102px;height:11px;"></p><p><img vspace="5" hspace="5" src="ejer6212.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="ejer6122.jpg" alt=""> </p><p>b. Repeat part (a) for the signal pair illustrated in Fig. P1.1-3c. Is your observation in part (a) still valid?</p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq05008442668540732386.png" alt="$Ex = x(t) + y(t)$" style="width:106px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq17719570211172295073.png" alt="$Ex = \pi/2 + \pi = 3\pi/2$" style="width:140px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq07923114220564966724.png" alt="$Ex = x(t) - y(t)$" style="width:106px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq11025961679283719750.png" alt="$Ex = \pi/2 - \pi = -\pi/2$" style="width:144px;height:15px;"></p><p><img vspace="5" hspace="5" src="ejer6312.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="ejer6322.jpg" alt=""> </p><h2 id="23">Ejercicio 7</h2><p>Escriba una funci&oacute;n que se llame <i>potencia</i> que reciba como argumento una funci&oacute;n (an&oacute;nima o simb&oacute;lica) y que regrese el c&aacute;lculo de la potencia para esto puede resultar &uacute;til investigar las instrucciones <i>int</i> , <i>integral</i> Se presupone utilizar el c&oacute;digo solo con funciones de potencia. Muestre el c&oacute;digo sin ejecutar, y posteriormente resuelva el problema 1.1.4</p><pre class="language-matlab"><span class="keyword">function</span> [resultado]=potencia(funb) <span class="comment">%funci&oacute;n que recibe una expresi&oacute;n en t&eacute;rminos de t</span>
+    limiteinferior=input(<span class="string">'ingresa el limite inferior de la funcion '</span>) <span class="comment">%l&iacute;mite inferior -T0/2</span>
+    limitesuperior=input(<span class="string">'ingresa el limite superior de la funcion '</span>) <span class="comment">%l&iacute;mite superior T0/2</span>
+    t0=abs(limiteinferior)+abs(limitesuperior) <span class="comment">%calculamos el t0 a partir de los l&iacute;mites, tomamos su valor absoluto para realizar la suma</span>
+    resultado=(1/t0)*int(abs(funb).^2,(-t0/2),(t0/2)); <span class="comment">%c&aacute;lculo de la integral usando la f&oacute;rmula de la potencia sin el l&iacute;mite</span>
+<span class="keyword">end</span>
+</pre><p><img vspace="5" hspace="5" src="ejer7.png" alt=""> </p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq00292149673207784169.png" alt="$$Px = \int_{-\infty}^{\infty} ||f(t)||^2dt$$" style="width:130px;height:34px;"></p><p>Se sabe que el valor rms es la ra&iacute;z cuadrada de la potencia</p><p>a)</p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq06516748400631027162.png" alt="$$Px = \int_{-1}^{1} ||-t^3||^2dt$$" style="width:128px;height:37px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq17974056066517403719.png" alt="$$Px = 1/7$$" style="width:61px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq07112636473312804942.png" alt="$$rms = \sqrt{1/7}$$" style="width:83px;height:18px;"></p><p>b)</p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq12133512567410927129.png" alt="$$Px = \int_{-1}^{1} ||2t^3||^2dt$$" style="width:118px;height:37px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq02853390562390453187.png" alt="$$Px = 4/7$$" style="width:61px;height:15px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq07098697593473566197.png" alt="$$rms = \sqrt{4/7}$$" style="width:83px;height:18px;"></p><p>c)</p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq15090796847758252154.png" alt="$$Px = \int_{-1}^{1} ||ct^3||^2dt$$" style="width:116px;height:37px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq05336180896827207187.png" alt="$$Px = ||c||^2/7$$" style="width:82px;height:18px;"></p><p><img src="SySPrac3EmmanuelEspinosa_VillegasHamlet_MiguelSandoval_eq15880516472477146923.png" alt="$$rms = \sqrt{||c||^2/7}$$" style="width:104px;height:18px;"></p><h2 id="24">Referencias</h2><div><ol><li>Manual de comandos <a href="https://ocw.unican.es/pluginfile.php/2021/course/section/2379/comandos-ejemplo-matlab.pdf">enlace</a></li><li>Canal de Mates y As&iacute; <a href="https://www.youtube.com/channel/UCuB5RVxI1tHwVvPJfHisPHQ">enlace</a></li><li>Documentacion de MATLAB</li></ol></div><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Practica 3 Señales en Tiempo Continuo
+%
+% Grupo: 2TV2
+%
+% Materia: Señales y Sistemas
+%
+% Alumnos:
+% 
+% _Espinosa Salas Emmanuel_
+%
+% _Sandoval Palma Miguel Angel_
+%
+% _Villegas Fraga Hamlet Ismael_ 
+%
+% Profesor: Dr. Rafael Martínez Martínez
+%
+%
+%% Introducción
+%%
+% *MatLab*
+%
+% MATLAB (Matrix Laboratory, “laboratorio de matrices”). Es un software matemático con entorno de desarrollo integrado (IDE) el cual contiene un lenguaje de programación propio (Lenguaje M) y es multiplataforma (Unix, Windows y Apple Mac Os X).
+% MATLAB es un software de gran uso en Centros de Investigación y Desarrollo así como en universidades.
+% En 1984 surge la primera versión, creado por Cleve Moler, con la idea de usar paquetes de subrutinas escritas en Fortran en los cursos de Análisis Numérico y Álgebra Lineal, sin tener una necesidad de programas que usaran este lenguaje.
+%
+% El lenguaje de programación M se creó en 1970 proporcionando un acceso sencillo al software de matrices LINPACK y EISPACK sin tener que hacer uso del lenguaje Fortran.
+% Ya en 2004 se apreciaba que MATLAB era usado por aproximadamente más de un millón de personas, tanto académicos como empresarios.
+% Dentro de sus principales funciones se encuentran:
+%
+% # Manipulación de Matrices.
+% # La representación de datos y funciones.
+% # Implementación de algoritmos.
+% # Creación de interfaces de usuario (GUI).
+% # Comunicación con programas en otros lenguajes y con otros dispositivos Hardware.
+%%
+% Aqui podra encontrar un libro para apoyarse sobre <http://www.dm.unibo.it/~piccolom/didattica/num_met/SAmatlab_09.pdf Matlab>
+%%
+% *Octave*
+%
+% Octave es un lenguaje de alto nivel para realizar cálculos numéricos en el ordenador, y también es un programa capaz de interpretar este lenguaje y realizar los cálculos. Octave ofrece una interfaz de usuario interactiva, orientada a línea de comandos, pero también puede ser utilizado en modo no interactivo, leyendo sus órdenes de fichero.
+% Octave originalmente fue desarrollado para facilitar la tarea a los estudiantes de Ingeniería Química de la universidad de Texas, sin que estos tuvieran que enfrentarse a las dificultades de la programación.
+% 
+% Su flexibilidad en seguida lo hizo popular y su uso se expandió a otros problemas relacionados con el álgebra lineal y las ecuaciones diferenciales y favoreció su desarrollo, agregando las aportaciones de la comunidad de usuarios.
+% Otros programas de características similares, y hasta cierto punto compatibles, son son el lenguaje R de la FSF, Matlab y Scilab. Estos dos últimos propietarios. Octave es software libre (bajo licencia GNU), lo que significa que se puede usar y redistribuir libremente, y que cualquiera puede ayudar para mejorarlo. Octave está disponible en Internet en http://www.octave.org.
+%
+%%
+% <https://cimec.org.ar/foswiki/pub/Main/Cimec/MetodosNumericosYSimulacion/metnums.pdf
+% Conceptos basicos en octave>
+%%
+% *Python*
+%
+% Python es un lenguaje de programación el cual fue creado por el holandés Guido van Rossum en los años 90. Su nombre esta inspirado en el grupo humorista británico Monty Python.
+% Este lenguaje es caracterizado por su simplicidad y rápido aprendizaje. Si queremos hacer el clásico hola mundo en este lenguaje, nos basta con escribir print “hola mundo”.
+% Las características principales de este lenguaje son cuatro:
+%
+% # Tipado dinámico, no es necesario indicar el tipo de variable al momento de declararlo ya que lo identifica automaticamente.
+% # Fuertemente tipado, no se permite tratar de manera implicita a una variable como si fuera de otro tipo.
+% # Multiplataforma,  se refiere a que no depende de un sistema operativo en especifico para funcionar bien.
+% # Multiparadigma, python es un lenguaje orientado a diversos paradigmas entre ellos tiene la programacion orientada a objetos, programación estructurada, programación funcional y programación orientada a aspectos.
+%
+%%
+% <https://legacy.gitbook.com/book/swaroopch/byte-of-python/details enlace de descarga o visualizacion sobre un libro para aprender python>
+%% Ejercicio 1
+% Crea una función que se llame _fun1_ y reciba dos parametros $\omega$ y 
+% $a$ la función debe regresar la evaluación $F(\omega)=a/(a^2+\omega^2)$,
+% esta función debe trabajar con $a\in R$ y $w\in  R^n$. Debe
+% mostrar su código en el reporte (sin ejecutar).
+%
+%   function [f] = fun1(w,a)
+%
+%       if imag(a)~=0
+%
+%           disp('error')
+%
+%       else
+%
+%           f=a./(a.^2+w.^2)
+%
+%       end
+%
+%   end
+%% Ejercicio 2
+% Construya una función que gráfique funciones de
+% $f:R\rightarrow R$ en el formato de su elección y pruebe
+% su código mostrando la gráfica de $F(\omega)$ vs $\omega$ en el intervalo
+% $[-2,2]$ para $a=1$, no debe
+% incluir el código, solo el uso de la función para mostrar la gráfica
+%
+%%
+% 
+% <<ejer22.jpg>>
+%% Ejercicio 3
+% Construya una función que gráfique funciones de
+% $f:R\rightarrow R^2$ en el formato de su elección y pruebe
+% su código mostrando la gráfica de la transformada de Fourier $F(w)$ en
+% $[-10,10]$ de la función $f(t)=e^{-2t}u(t)$, puede utilizar una función
+% anonima para este fin, no debe incluir el código, solo el uso de la 
+% función para mostrarla gráfica. Reporte la gráfica de $f(t)$ de 
+% $[-1,5]$ (recuerde que ya tiene una función para esto). Reporte 
+% del espectro de magnitud y del espectro de fase en $[-10,10]$ (puedes con
+% sultar con help la descripción de _abs_, _angle_, _atan2_). Solo
+% reporte las graficas.
+%
+%%
+% 
+% <<ejer331.jpg>>
+% 
+%%
+% 
+% <<ejer322.jpg>>
+% 
+%%
+% 
+% <<ejer332.jpg>>
+%
+%% Ejercicio 4
+% Realiza las mismas operaciones que Lathi en las secciones M1.1 a M1.4
+% que se encuentra al final del capítulo 1 y antes de la sección de
+% problemas, cambie los _inline_ por funciones anonimas
+%
+close all; clear all; clc;
+% M1.1
+t = -5:0.01:5;
+
+
+
+% Anonymous Function
+ f = @(t) exp(-t).*cos(2*pi*t);
+
+% Gráfica de la función anónima
+ figure(1)
+ plot(t, f(t),'g', 'LineWidth', 2);
+ title('M1.1: f(t) = e^{-t}cos(2\pit)');
+ xlabel('t');
+ ylabel('f(t)');
+ grid on;
+
+% M1.2
+
+% Anonymous Function u(t)
+u = @(t) t >= 0;
+
+% Gráfica de u(t)
+figure(2);
+hold on;
+plot(t, u(t),'r', 'LineWidth', 2);
+title('M1.2: Escalon u(t)');
+xlabel('t');
+ylabel('u(t)');
+grid on;
+
+% Anonymous Function
+p = @(t) u(t) - u(t-1);
+
+% Gráfica de p(t)
+figure(3);
+hold on;
+plot(t, p(t),'c', 'LineWidth', 2);
+title('M1.2: p(t) = u(t) - u(t-1)');
+xlabel('t');
+ylabel('p(t)');
+grid on;
+
+%M1.3
+
+% Anonymous Function
+f = @(t) exp(-t).*cos(2*pi*t);
+
+% Anonymous Function
+g = @(t) f(t).*u(t);
+
+% Gráfica g(t)
+figure(4);
+hold on;
+plot(t, g(t),'k', 'LineWidth', 2);
+title('M1.3: g(t)');
+xlabel('t');
+ylabel('g(t)');
+grid on;
+
+% Gráfica g(2t+1)
+figure(5);
+hold on;
+plot(t, g(2*t+1),'y', 'LineWidth', 2);
+title('M1.3: g(2t+1)');
+xlabel('t');
+ylabel('g(2t+1)');
+grid on;
+
+% Gráfica g(-t+1)
+figure(6);
+hold on;
+plot(t, g(-1*t+1),'m', 'LineWidth', 2);
+title('M1.3: g(-t+1)');
+xlabel('t');
+ylabel('g(-t+1)');
+grid on;
+
+% Anonymous Function
+h = @(t) g(2*t+1) + g(-1*t+1);
+
+% Gráfica g(-t+1)
+figure(7);
+hold on;
+plot(t, h(t), 'LineWidth', 2);
+title('M1.3: h(t) = g(2t+1) + g(-t+1)');
+xlabel('t');
+ylabel('h(t)');
+grid on;
+%%
+%M1.4
+% Definiciones
+u = @(t) t >= 0;
+x = @(t) exp(-t).*(u(t)-u(t-1));
+x2 = @(t) exp(-2*t).*(u(t)-u(t-1));
+
+% Energía de x(t)
+
+% El resultado tendrá un 0.1% de error relativo
+t = 0:0.001:1;
+
+% Integración numérica mediante aproximación rectangular (sum)
+E_x = sum(x(t).*x(t)*0.001);
+display(E_x);
+
+% Integración numérica mendiante cuadratura de Simpson (quad)
+% Se debe elevar al cuadrado la señal e indicar los límites de integración
+S_x = integral(x2,0,1);
+display(S_x);
+
+% Energía de g(t)
+
+t = 0:0.001:100;
+
+% Definiciones
+f = @(t) exp(-t).*cos(2*pi*t);
+f2 = @(t) exp(-2*t).*(cos(2*pi*t)).^2;
+g = @(t) f(t).*u(t);
+g2 = @(t) f2(t).*u(t);
+
+% Integración numérica mediante aproximación rectangular (sum)
+E_g = sum(g(t).*g(t)*0.001);
+display(E_g);
+
+% Integración numérica mendiante cuadratura de Simpson (quad)
+S_g = integral(g2,0,100);
+display(S_g);
+
+% Energía de h(t)
+
+t = -2:0.001:2;
+
+% Definiciones
+h = @(t) g(2*t+1) + g(-1*t+1);
+h2 = @(t) g2(2*t+1) + g2(-1*t+1);
+
+% Integración numérica mediante aproximación rectangular (sum)
+E_h = sum(h(t).*h(t)*0.001);
+display(E_h);
+
+% Integración numérica mendiante cuadratura de Simpson (quad)
+S_h = integral(h2,-1,1);
+display(S_h);
+%% Ejercicio 5
+% Resuelve el problema 1.2.2 usando las herramientas del paso anterior.
+
+t = -8:0.01:10;
+
+% Definiciones
+u = @(t) t >= 0;
+x = @(t) -t.*(u(t+4)-u(t))+t.*(u(t)-u(t-2));
+
+% Gráfica de la señal x(t)
+figure(8);
+hold on;
+plot(t, x(t),'m', 'LineWidth', 2);
+title('x(t) = -t(u(t+4)-u(t))+t(u(t)-u(t-2))');
+xlabel('t');
+ylabel('x(t)');
+grid on;
+
+% a) x(t-4)
+figure(9);
+hold on;
+plot(t, x(t-4),'k', 'LineWidth', 2);
+title('x(t-4)');
+xlabel('t');
+ylabel('x(t-4)');
+grid on;
+
+% b) x(t/1.5)
+figure(10);
+hold on;
+plot(t, x(t./(1.5)),'y', 'LineWidth', 2);
+title('x(t/1.5)');
+xlabel('t');
+ylabel('x(t/1.5)');
+grid on;
+
+% c) x(-t)
+figure(11);
+hold on;
+plot(t, x(-t),'g', 'LineWidth', 2);
+title('x(-t)');
+xlabel('t');
+ylabel('x(-t)');
+grid on;
+
+% d) x(2t-4)
+figure(12);
+hold on;
+plot(t, x(2*t-4),'b', 'LineWidth', 2);
+title('x(2t-4)');
+xlabel('t');
+ylabel('x(2t-4)');
+grid on;
+
+% e) x(2-t)
+figure(13);
+hold on;
+plot(t, x(2-t),'r', 'LineWidth', 2);
+title('x(2-t)');
+xlabel('t');
+ylabel('x(2-t)');
+grid on;
+%% Ejercicio 6
+% Escriba una función que se llame _energia_ que reciba como argumento
+% una función (anónima o simbólica) y que regrese el calculo de la energía,
+% para esto puede resultar útil investigar las instrucciones _int_ , _integral_
+% Se presupone utilizar el código solo con funciones de energia. Muestre
+% el código sin ejecutar, y posteriormente resuelva el problema 1.1.3
+%
+%   function [resultado]= energia(funevaluar) %la funcion energia recibe un argumento que es la funcion en terminos de t
+%
+%       limiteinferior=input('ingresa el limite de la integral ') 
+%
+%       limitesuperior=input('ingresa el limite superior de la integral ') 
+%       
+%       resultado=int(abs(funevaluar).^2,limiteinferior,limitesuperior);
+%
+%   end
+%
+% a. Find the energies of the pair of signals x(t) and y(t) depicted in Fig. P1.1-3a and P1.1-3b. Sketch and find
+% the energies of signals x(t) + y(t) and x(t) ? y(t).
+% 
+% <<ejer6.png>>
+%
+% (a)
+%
+% $Ex = x(t) + y(t)$
+%
+% $Ex = 2 + 2 = 4$
+%
+% $Ex = x(t) - y(t)$
+%
+% $Ex = 2 - 2 = 0$
+%
+% 
+% <<ejer6112.jpg>>
+% 
+%%
+% 
+% <<ejer6122.jpg>>
+% 
+%
+% (b)
+%
+% $Ex = x(t) + y(t)$
+%
+% $Ex = \pi + \pi = 2\pi$
+%
+% $Ex = x(t) - y(t)$
+%
+% $Ex = \pi - \pi = 0$
+%%
+% 
+% <<ejer6212.jpg>>
+% 
+%%
+% 
+% <<ejer6122.jpg>>
+% 
+%
+% b. Repeat part (a) for the signal pair illustrated in Fig. P1.1-3c. Is your observation in part (a) still valid?
+% 
+% $Ex = x(t) + y(t)$
+%
+% $Ex = \pi/2 + \pi = 3\pi/2$
+%
+% $Ex = x(t) - y(t)$
+%
+% $Ex = \pi/2 - \pi = -\pi/2$
+%
+% 
+% <<ejer6312.jpg>>
+%%
+% 
+% <<ejer6322.jpg>>
+%
+%% Ejercicio 7
+% Escriba una función que se llame _potencia_ que reciba como argumento
+% una función (anónima o simbólica) y que regrese el cálculo de la potencia
+% para esto puede resultar útil investigar las instrucciones _int_ , _integral_
+% Se presupone utilizar el código solo con funciones de potencia. Muestre
+% el código sin ejecutar, y posteriormente resuelva el problema 1.1.4
+%
+%   function [resultado]=potencia(funb) %función que recibe una expresión en términos de t
+%       limiteinferior=input('ingresa el limite inferior de la funcion ') %límite inferior -T0/2
+%       limitesuperior=input('ingresa el limite superior de la funcion ') %límite superior T0/2
+%       t0=abs(limiteinferior)+abs(limitesuperior) %calculamos el t0 a partir de los límites, tomamos su valor absoluto para realizar la suma
+%       resultado=(1/t0)*int(abs(funb).^2,(-t0/2),(t0/2)); %cálculo de la integral usando la fórmula de la potencia sin el límite 
+%   end 
+%
+% 
+% <<ejer7.png>>
+% 
+% $$Px = \int_{-\infty}^{\infty} ||f(t)||^2dt$$ 
+%
+% Se sabe que el valor rms es la raíz cuadrada de la potencia
+%
+% a) 
+%
+% $$Px = \int_{-1}^{1} ||-t^3||^2dt$$
+%
+% $$Px = 1/7$$
+%
+% $$rms = \sqrt{1/7}$$
+%
+% b) 
+%
+% $$Px = \int_{-1}^{1} ||2t^3||^2dt$$
+%
+% $$Px = 4/7$$
+%
+% $$rms = \sqrt{4/7}$$
+%
+% c) 
+%
+% $$Px = \int_{-1}^{1} ||ct^3||^2dt$$
+%
+% $$Px = ||c||^2/7$$
+%
+% $$rms = \sqrt{||c||^2/7}$$
+%
+%% Referencias 
+% # Manual de comandos
+% <https://ocw.unican.es/pluginfile.php/2021/course/section/2379/comandos-ejemplo-matlab.pdf
+% enlace>
+% # Canal de Mates y Así <https://www.youtube.com/channel/UCuB5RVxI1tHwVvPJfHisPHQ enlace>
+% # Documentacion de MATLAB
+
+##### SOURCE END #####
+--></body></html>
